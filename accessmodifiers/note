@@ -1,0 +1,15 @@
+  Location           calling          called           access
+  
+  static
+  same class         static           static           memberName
+                     non_static       static           memberName
+                     
+  different class    static           static           className.memberName
+                     non_static       static           className.memberName
+                     
+  non_static                   
+  same class         static           non_static       objetcreation.memberName
+                     non_static       non_static       memberName
+                     
+  different class    static           non_static       objetcreation.memberName                   
+                     non_static       non_static       objetcreation.memberName

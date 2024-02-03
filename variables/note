@@ -1,0 +1,7 @@
+
+ Member         local    from method            call member and local fram same method
+ static                  static                 className.memberName
+ non_static              static                 new className().memberName
+ static                  non_static             className.memberName
+ non_static              non_static             this.memberName
+              
