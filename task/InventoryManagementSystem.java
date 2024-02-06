@@ -1,4 +1,4 @@
-package internshiptasks;
+package task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,33 @@ class Inventory {
         }
         System.out.println("Product not found");
     }
-
+    
+    public void sellItem(int productId, int quantityToSell) {
+        for (Product product : products) {
+            if (product.getId() == productId) {
+                if (product.getQuantity() >= quantityToSell) {
+                    product.setQuantity(product.getQuantity() - quantityToSell);
+                    System.out.println("Item sold successfully");
+                } else {
+                    System.out.println("Insufficient quantity available to sell");
+                }
+                return;
+            }
+        }
+        System.out.println("Product not found");
+    }
+    
+    public void restockItem(int productId, int quantityToAdd) {
+        for (Product product : products) {
+            if (product.getId() == productId) {
+                product.setQuantity(product.getQuantity() + quantityToAdd);
+                System.out.println("Item restocked successfully");
+                return;
+            }
+        }
+        System.out.println("Product not found");
+    }
+    
     public void printInventory() {
         System.out.println("Inventory Report:");
         for (Product product : products) {
@@ -109,7 +135,8 @@ public class InventoryManagementSystem {
         
         System.out.println("======================delete========================");
         inventory.removeProductById(20);
-        
+        inventory.sellItem(10, 5);
+//             inventory.restockItem(10, 10);
         System.out.println("=======================all product=======================");
         inventory.printInventory();
     }
