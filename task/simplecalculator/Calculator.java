@@ -1,128 +1,98 @@
+// Calculator.java
 package task.simplecalculator;
 
 public class Calculator {
-    // Method to perform addition with two integer numbers
-    public void addition(int firstNumber, int secondNumber) {
-        int result = firstNumber + secondNumber;
-        System.out.println("Result: " + result);
-    }
-
-    // Method to perform addition with two double numbers (result rounded to nearest integer)
-    public void addition(double firstNumber, double secondNumber) {
-        double result = firstNumber + secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform addition with one double and one integer number (result rounded to nearest integer)
-    public void addition(double firstNumber, int secondNumber) {
-        double result = firstNumber + secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform addition with one integer and one double number (result rounded to nearest integer)
-    public void addition(int firstNumber, double secondNumber) {
-        double result = firstNumber + secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform subtraction with two integer numbers
-    public void subtraction(int firstNumber, int secondNumber) {
-        int result = firstNumber - secondNumber;
-        System.out.println("Result: " + result);
-    }
-
-    // Method to perform subtraction with two double numbers (result rounded to nearest integer)
-    public void subtraction(double firstNumber, double secondNumber) {
-        double result = firstNumber - secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform subtraction with one double and one integer number (result rounded to nearest integer)
-    public void subtraction(double firstNumber, int secondNumber) {
-        double result = firstNumber - secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform subtraction with one integer and one double number (result rounded to nearest integer)
-    public void subtraction(int firstNumber, double secondNumber) {
-        double result = firstNumber - secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    
-    // Method to perform multiplication with two integer numbers
-    public void multiplication(int firstNumber, int secondNumber) {
-        int result = firstNumber * secondNumber;
-        System.out.println("Result: " + result);
-    }
-
-    // Method to perform multiplication with two double numbers (result rounded to nearest integer)
-    public void multiplication(double firstNumber, double secondNumber) {
-        double result = firstNumber * secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform multiplication with one double and one integer number (result rounded to nearest integer)
-    public void multiplication(double firstNumber, int secondNumber) {
-        double result = firstNumber * secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform multiplication with one integer and one double number (result rounded to nearest integer)
-    public void multiplication(int firstNumber, double secondNumber) {
-        double result = firstNumber * secondNumber;
-        long roundedResult = Math.round(result); // Round to the nearest integer
-        System.out.println("Result: " + roundedResult); // Print rounded result
-    }
-
-    // Method to perform division with two integer numbers
-    public void division(int firstNumber, int secondNumber) {
-        if (secondNumber != 0) {
-            int result = firstNumber / secondNumber;
-            System.out.println("Result: " + result);
+	 // Method to perform addition operation
+    public void addition(Object firstInput, Object secondInput) {
+        if (firstInput instanceof Integer && secondInput instanceof Integer) {
+            System.out.println("Result: " + ((int) firstInput + (int) secondInput));
+        } else if (firstInput instanceof Double && secondInput instanceof Double) {
+            double result = (double) firstInput + (double) secondInput;
+            printRoundedResult(result);
+        } else if (firstInput instanceof Double && secondInput instanceof Integer) {
+            double result = (double) firstInput + (int) secondInput;
+            printRoundedResult(result);
+        } else if (firstInput instanceof Integer && secondInput instanceof Double) {
+            double result = (int) firstInput + (double) secondInput;
+            printRoundedResult(result);
         } else {
-            System.out.println("Cannot divide by zero!");
+            System.out.println("Invalid input types for addition.");
         }
     }
-
-    // Method to perform division with two double numbers (result rounded to nearest integer)
-    public void division(double firstNumber, double secondNumber) {
-        if (secondNumber != 0) {
-            double result = firstNumber / secondNumber;
-            long roundedResult = Math.round(result); // Round to the nearest integer
-            System.out.println("Result: " + roundedResult); // Print rounded result
+    // Method to perform subtraction operation
+    public void subtraction(Object firstInput, Object secondInput) {
+        if (firstInput instanceof Integer && secondInput instanceof Integer) {
+            System.out.println("Result: " + ((int) firstInput - (int) secondInput));
+        } else if (firstInput instanceof Double && secondInput instanceof Double) {
+            double result = (double) firstInput - (double) secondInput;
+            printRoundedResult(result);
+        } else if (firstInput instanceof Double && secondInput instanceof Integer) {
+            double result = (double) firstInput - (int) secondInput;
+            printRoundedResult(result);
+        } else if (firstInput instanceof Integer && secondInput instanceof Double) {
+            double result = (int) firstInput - (double) secondInput;
+            printRoundedResult(result);
         } else {
-            System.out.println("Cannot divide by zero!");
+            System.out.println("Invalid input types for subtraction.");
         }
     }
-
-    // Method to perform division with one double and one integer number (result rounded to nearest integer)
-    public void division(double firstNumber, int secondNumber) {
-        if (secondNumber != 0) {
-            double result = firstNumber / secondNumber;
-            long roundedResult = Math.round(result); // Round to the nearest integer
-            System.out.println("Result: " + roundedResult); // Print rounded result
+    // Method to perform multiplication operation
+    public void multiplication(Object firstInput, Object secondInput) {
+        if (firstInput instanceof Integer && secondInput instanceof Integer) {
+            System.out.println("Result: " + ((int) firstInput * (int) secondInput));
+        } else if (firstInput instanceof Double && secondInput instanceof Double) {
+            double result = (double) firstInput * (double) secondInput;
+            printRoundedResult(result);
+        } else if (firstInput instanceof Double && secondInput instanceof Integer) {
+            double result = (double) firstInput * (int) secondInput;
+            printRoundedResult(result);
+        } else if (firstInput instanceof Integer && secondInput instanceof Double) {
+            double result = (int) firstInput * (double) secondInput;
+            printRoundedResult(result);
         } else {
-            System.out.println("Cannot divide by zero!");
+            System.out.println("Invalid input types for multiplication.");
         }
     }
-
-    // Method to perform division with one integer and one double number (result rounded to nearest integer)
-    public void division(int firstNumber, double secondNumber) {
-        if (secondNumber != 0) {
-            double result = firstNumber / secondNumber;
-            long roundedResult = Math.round(result); // Round to the nearest integer
-            System.out.println("Result: " + roundedResult); // Print rounded result
+    // Method to perform division operation
+    public void division(Object firstInput, Object secondInput) {
+        if (firstInput instanceof Integer && secondInput instanceof Integer) {
+            int secondNumber = (int) secondInput;
+            if (secondNumber != 0) {
+                System.out.println("Result: " + ((int) firstInput / secondNumber));
+            } else {
+                System.out.println("Cannot divide by zero!");
+            }
+        } else if (firstInput instanceof Double && secondInput instanceof Double) {
+            double secondNumber = (double) secondInput;
+            if (secondNumber != 0) {
+                double result = (double) firstInput / secondNumber;
+                printRoundedResult(result);
+            } else {
+                System.out.println("Cannot divide by zero!");
+            }
+        } else if (firstInput instanceof Double && secondInput instanceof Integer) {
+            int secondNumber = (int) secondInput;
+            if (secondNumber != 0) {
+                double result = (double) firstInput / secondNumber;
+                printRoundedResult(result);
+            } else {
+                System.out.println("Cannot divide by zero!");
+            }
+        } else if (firstInput instanceof Integer && secondInput instanceof Double) {
+            double secondNumber = (double) secondInput;
+            if (secondNumber != 0) {
+                double result = (int) firstInput / secondNumber;
+                printRoundedResult(result);
+            } else {
+                System.out.println("Cannot divide by zero!");
+            }
         } else {
-            System.out.println("Cannot divide by zero!");
+            System.out.println("Invalid input types for division.");
         }
+    }
+    //print the rounded result
+    private void printRoundedResult(double result) {
+        long roundedResult = Math.round(result);
+        System.out.println("Result: " + roundedResult);
     }
 }
