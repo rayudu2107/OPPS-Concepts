@@ -8,65 +8,100 @@ import java.util.Scanner;
  * Represents the inventory management system.
  */
 public class Inventory {
+    // Map to store products with their IDs as keys
     private Map<Long, Product> products = new HashMap<>();
 
-     // Adds a new product to the inventory.
-    public void addProduct(long productId, String productName, double productPrice, int productQuantity) {
+    // Method to add a new product to the inventory
+    public void addProduct(Scanner input) {
+        System.out.println("Enter the product Id:");
+        long productId = getValidProductId(input); // Validate and retrieve product ID
+        if (products.containsKey(productId)) {
+            System.out.println("Error: Product Id already exists.");
+            return;
+        }
+        // Retrieve other product details from the user
+        System.out.println("Enter the product name:");
+        String productName = input.nextLine();
+        System.out.println("Enter the product price:");
+        double productPrice = getValidAmount(input);
+        System.out.println("Enter the product quantity: ");
+        int productQuantity = getValidProductQuantity(input);
+        // Create a new Product object and add it to the inventory
         Product product = new Product(productId, productName, productPrice, productQuantity);
         products.put(productId, product);
-        System.out.println("Product added successfully. Product Id: " + productId + "    Product name: " + productName);
+        System.out.println("Product added successfully.");
     }
 
-     // Removes a product from the inventory by its ID.
-    public void removeProductById(long productId) {
+    // Method to remove a product from the inventory by its ID
+    public void removeProductById(Scanner input) {
+        System.out.println("Enter the product Id:");
+        long productId = getValidProductId(input); // Validate and retrieve product ID
         if (products.containsKey(productId)) {
             products.remove(productId);
             System.out.println("Product removed successfully");
         } else {
-            System.out.println("Product is not found");
+            System.out.println("Error: Product not found.");
         }
     }
 
-     // Updates the details of a product in the inventory by its ID.     
-    public void updateProductByID(long productId, String productName, double newPrice, int newQuantity) {
+    // Method to update details of a product in the inventory by its ID
+    public void updateProductByID(Scanner input) {
+        System.out.println("Enter the product Id:");
+        long productId = getValidProductId(input); // Validate and retrieve product ID
         if (products.containsKey(productId)) {
             Product productToUpdate = products.get(productId);
+            // Retrieve updated product details from the user
+            System.out.println("Enter the product name:");
+            String productName = input.nextLine();
+            System.out.println("Enter the product price:");
+            double productPrice = getValidAmount(input);
+            System.out.println("Enter the product quantity: ");
+            int productQuantity = getValidProductQuantity(input);
+            // Update the product details
             productToUpdate.setName(productName);
-            productToUpdate.setPrice(newPrice);
-            productToUpdate.setQuantity(newQuantity);
-            System.out.println("Product updated successfully. Product Id: " + productId + "    Product name: " + productName);
+            productToUpdate.setPrice(productPrice);
+            productToUpdate.setQuantity(productQuantity);
+            System.out.println("Product updated successfully.");
         } else {
-            System.out.println("Product not found");
+            System.out.println("Error: Product not found.");
         }
     }
 
-     // Sells a specified quantity of a product from the inventory.     
-    public void sellItem(long productId, int quantityToSell) {
+    // Method to sell a specified quantity of a product from the inventory
+    public void sellItem(Scanner input) {
+        System.out.println("Enter the product Id:");
+        long productId = getValidProductId(input); // Validate and retrieve product ID
         if (products.containsKey(productId)) {
             Product productToSell = products.get(productId);
-            if (productToSell.getQuantity() >= quantityToSell) {
+            System.out.println("Enter the quantity to sell:");
+            int quantityToSell = getValidProductQuantity(input); // Validate and retrieve quantity
+            if (quantityToSell <= productToSell.getQuantity()) {
                 productToSell.setQuantity(productToSell.getQuantity() - quantityToSell);
-                System.out.println("Item sold successfully");
+                System.out.println("Item sold successfully.");
             } else {
-                System.out.println("Insufficient quantity available to sell");
+                System.out.println("Error: Insufficient quantity available to sell.");
             }
         } else {
-            System.out.println("Product not found");
+            System.out.println("Error: Product not found.");
         }
     }
 
-     // ReStocks a specified quantity of a product in the inventory.
-    public void restockItem(long productId, int quantityToAdd) {
+    // Method to restock a specified quantity of a product in the inventory
+    public void restockItem(Scanner input) {
+        System.out.println("Enter the product Id:");
+        long productId = getValidProductId(input); // Validate and retrieve product ID
         if (products.containsKey(productId)) {
             Product productToRestock = products.get(productId);
+            System.out.println("Enter the quantity to restock:");
+            int quantityToAdd = getValidProductQuantity(input); // Validate and retrieve quantity
             productToRestock.setQuantity(productToRestock.getQuantity() + quantityToAdd);
-            System.out.println("Item restocked successfully");
+            System.out.println("Item restocked successfully.");
         } else {
-            System.out.println("Product not found");
+            System.out.println("Error: Product not found.");
         }
     }
 
-     // Generates a report of the current inventory.
+    // Method to generate a report of the current inventory
     public void reportInventory() {
         System.out.println("Inventory Report:");
         for (Product product : products.values()) {
@@ -77,77 +112,57 @@ public class Inventory {
         }
     }
 
-     // Validates and retrieves a valid product ID from user input.
+    // Method to validate and retrieve a valid product ID from user input
     public static long getValidProductId(Scanner input) {
         long productId;
         while (true) {
             try {
                 productId = Long.parseLong(input.nextLine());
-                break; // Exit loop if parsing successful
+                if (productId <= 0) {
+                    System.out.println("Error: Please enter a positive product id.");
+                    continue;
+                }
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Error: Please enter a valid product id.");
-                // Continue loop to allow the user to input again
             }
         }
         return productId;
     }
 
-     // Validates and retrieves a valid product quantity from user input.
+    // Method to validate and retrieve a valid product quantity from user input
     public int getValidProductQuantity(Scanner input) {
-        int productQuantity;
+        int quantity;
         while (true) {
             try {
-                productQuantity = Integer.parseInt(input.nextLine());
-                if (productQuantity > 0) {
-                    break; // Exit loop if parsing successful and quantity is positive
-                } else {
-                    System.out.println("Error: Product quantity must be greater than 0.");
+                quantity = Integer.parseInt(input.nextLine());
+                if (quantity <= 0) {
+                    System.out.println("Error: Quantity must be greater than 0.");
+                    continue;
                 }
+                break;
             } catch (NumberFormatException e) {
-                System.out.println("Error: Please enter a valid product quantity.");
+                System.out.println("Error: Please enter a valid quantity.");
             }
         }
-        return productQuantity;
+        return quantity;
     }
 
-     // Validates and retrieves a valid amount value from user input.
+    // Method to validate and retrieve a valid amount value from user input
     public double getValidAmount(Scanner input) {
-        double value;
+        double amount;
         while (true) {
             try {
-                value = Double.parseDouble(input.nextLine());
-                if (value < 0) {
-                    System.out.println("Error: Value cannot be negative.");
-                    continue; // Continue loop to allow the user to input again
+                amount = Double.parseDouble(input.nextLine());
+                if (amount <= 0) {
+                    System.out.println("Error: Amount must be greater than 0.");
+                    continue;
                 }
-                break; // Exit loop if parsing successful
+                break;
             } catch (NumberFormatException e) {
-                System.out.println("Error: Please enter a valid price.");
-                // Continue loop to allow the user to input again
+                System.out.println("Error: Please enter a valid amount.");
             }
         }
-        return value;
-    }
-
-     // Checks if a product with the given ID exists in the inventory.
-    public boolean getProductByID(long updateProductId) {
-        if (products.containsKey(updateProductId)) {
-            return true;
-        } else {
-            System.out.println("Product is not found");
-            return false;
-        }
-    }
-
-     // Checks if a product ID already exists in the inventory.
-    public boolean getProductID(long updateProductId) {
-        while (true) {
-            if (products.containsKey(updateProductId)) {
-                System.out.println(" Error: Product Id already exists.");
-                return true;
-            } else {
-                return false;
-            }
-        }
+        return amount;
     }
 }
