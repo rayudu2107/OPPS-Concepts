@@ -1,16 +1,17 @@
 package task.simplebankingsystem;
+
 import java.util.Scanner;
 
-//Class representing a bank account
+// Class representing a bank account
 public class Account {
-    long accNo;
-    String name;
-    String branch;
-    static String bankName = "State Bank of India";
-    double balance;
-    String accountHolderAddress;
+    private long accNo; // Unique identifier for the account
+    private String name; // Name of the account holder
+    private String branch; // Branch associated with the account
+    private static String bankName = "State Bank of India"; // Static bank name
+    private double balance; // Current balance of the account
+    private String accountHolderAddress; // Address of the account holder
 
-    // Constructor to initialize account details
+    // Constructor to initialize the account with provided values
     public Account(long accNo, String name, String branch, double balance, String accountHolderAddress) {
         this.accNo = accNo;
         this.name = name;
@@ -53,17 +54,17 @@ public class Account {
         }
     }
 
-    // Method to check the available balance
+    // Method to check the current balance of the account
     public void checkBalance() {
         System.out.println("Available balance: " + balance);
     }
 
-    // Method to get a valid account number from user input
-    public static long getValidAccountNumber(Scanner input) {
+    // Static method to validate and retrieve a valid account number from user input
+    public static long getValidAccountNumber(Scanner scanner) {
         long accNo;
         while (true) {
             try {
-                accNo = Long.parseLong(input.nextLine());
+                accNo = Long.parseLong(scanner.nextLine());
                 break; // Exit loop if parsing successful
             } catch (NumberFormatException e) {
                 System.out.println("Error: Please enter a valid account number.");
@@ -73,12 +74,12 @@ public class Account {
         return accNo;
     }
 
-    // Method to get a valid amount value from user input
-    public static double getValidAmount(Scanner input) {
+    // Static method to validate and retrieve a valid amount from user input
+    public static double getValidAmount(Scanner scanner) {
         double value;
         while (true) {
             try {
-                value = Double.parseDouble(input.nextLine());
+                value = Double.parseDouble(scanner.nextLine());
                 if (value < 0) {
                     System.out.println("Error: Value cannot be negative.");
                     continue; // Continue loop to allow the user to input again
@@ -91,6 +92,4 @@ public class Account {
         }
         return value;
     }
-
 }
-
