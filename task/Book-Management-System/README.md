@@ -78,8 +78,8 @@ This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE
 
 To get started with the Book Management System project, follow the setup instructions in the respective directories:
 
-- [Backend Setup Instructions](/book-management-system-api/README.md)
-- [Frontend Setup Instructions](/book-management-system-ui/README.md)
+- [Backend Setup Instructions](/task/Book-Management-System/book-management-system-api)
+- [Frontend Setup Instructions](/task/Book-Management-System/book-management-system-ui)
 
 ## Contributors
 
